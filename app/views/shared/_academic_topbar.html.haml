@@ -1,0 +1,27 @@
+%nav.navbar.navbar-expand-lg.mx-4
+  .container-fluid
+    %a.navbar-brand{ href: academic_menu_index_path }
+      = image_pack_tag 'woot_logo.svg', height: 50
+    %button.navbar-toggler{ 'aria-controls' => 'navbarSupportedContent', 'aria-expanded' => 'false', 'aria-label' => 'Toggle navigation', 'data-bs-target' => '#navbarSupportedContent', 'data-bs-toggle' => 'collapse', type: 'button' }
+      %span.navbar-toggler-icon
+    .collapse.navbar-collapse.mx-4.border-primary.border-bottom.border-2#navbarSupportedContent
+      %ul.navbar-nav.me-auto.mb-2.mb-lg-0
+        %li.nav-item.my-auto
+          %a.nav-link.active{ 'aria-current' => 'page' }
+            = link_to academic_menu_index_path, class: 'text-primary' do
+              %h4.px-4.py-2.nav-el.rounded-5
+                Menu
+        %li.nav-item.my-auto
+          %a.nav-link.active{ 'aria-current' => 'page' }
+            = link_to academic_resources_path(current_academic), class: 'text-primary' do
+              %h4.px-4.py-2.nav-el.rounded-5
+                Quizzes
+      .btn-group.dropdown.d-felx.mt-auto
+        %h5.px-3.py-2.bi.bi-person-circle.text-primary.user-select-none{ 'aria-expanded' => 'false', 'aria-haspopup' => 'true', 'data-bs-toggle' => 'dropdown', type: 'button' }
+          = current_academic.name
+          .d-inline-flex.bi.bi-caret-down-fill
+        .dropdown-menu.w-100.rounded-3.border-primary{ 'aria-labelledby' => 'dropdownMenuButton' }
+          = button_to destroy_academic_session_path, method: :delete, class: 'text-primary px-1 dropdown-item' do
+            %h6.d-flex.d-inline-flex.text-primary.fw-bold.my-auto.ms-2
+              .bi.bi-box-arrow-in-right
+              &nbsp; Sign Out

@@ -1,0 +1,107 @@
+= page_title "#{@quiz.name} - Quiz Preview"
+
+= render 'shared/page_heading', text: "Preview - #{@quiz.name}", icon: 'bi-eye-fill'
+
+.text-center.pt-2
+  .my-3.text-black.fw-semibold.d-flex.d-inline-flex.display-5
+    #preview-question
+      1. #{@question.content}
+
+.mx-auto.text-center.col-10
+  - icons = %w[triangle square circle star pentagon heart]
+  - 6.times do |i|
+    - if @answers[i].present?
+      .d-block.btn.rounded-5.py-2.my-2.mx-1.mx-lg-5.bi.text-white{ id: "answer#{i + 1}-preview", class: "bg-answer#{i + 1}" }
+        %h4.d-flex.d-inline-flex.text-white.fw-semibold.text-white.my-auto
+          - if @answers[i].correct
+            .bi.bi-check{ id: "answer#{i + 1}-check-preview", style: 'font-size: 2.5rem;' }
+          - else
+            .bi{ id: "answer#{i + 1}-check-preview", style: 'font-size: 2.5rem;' }
+          .my-auto.bi{ class: "bi-#{icons[i]}-fill" }
+          &nbsp;&nbsp;
+          %p.my-auto= @answers[i].content
+    - else
+      .d-none.btn.rounded-5.py-2.my-2.mx-1.mx-lg-5.bi.text-white{ id: "answer#{i + 1}-preview", class: "bg-answer#{i + 1}" }
+        %h4.d-flex.d-inline-flex.text-white.fw-semibold.text-white.my-auto.my-auto
+          .bi{ id: "answer#{i + 1}-check-preview", style: 'font-size: 2.5rem;' }
+          .my-auto.bi{ class: "bi-#{icons[i]}-fill" }
+          &nbsp;&nbsp;
+          %p.my-auto
+
+.text-center.pt-3.d-block
+  = render 'preview_buttons', quiz: @quiz
+
+:javascript
+  currPosition = 0;
+  quizObj = #{raw @quiz_json};
+  questionsObj = quizObj.questions;
+
+  nextBtnPreview = document.getElementById('next-btn-preview');
+  previousBtnPreview = document.getElementById('previous-btn-preview');
+
+  if (questionsObj.length == 1)
+    nextBtnPreview.disabled = true;
+
+  nextBtnPreview.addEventListener('click', function() {
+    currPosition++;
+    previousBtnPreview.disabled = false;
+
+    if (currPosition + 1 >= questionsObj.length)
+      nextBtnPreview.disabled = true;
+
+    updatePreview(currPosition);
+  });
+
+  previousBtnPreview.addEventListener('click', function() {
+    currPosition--;
+    nextBtnPreview.disabled = false;
+
+    if (currPosition == 0)
+      previousBtnPreview.disabled = true;
+
+    updatePreview(currPosition);
+  });
+
+  function updatePreview(currPosition) {
+    const currentQuestion = questionsObj[currPosition];
+    const currentAnswers = currentQuestion.answers;
+
+    const previewQuestionDiv = document.getElementById('preview-question');
+    previewQuestionDiv.textContent = `${currentQuestion.position}. ${currentQuestion.content}`;
+
+    const ansArray = [];
+    const ansArrayCheck = []
+
+    for (let i = 1; i <= 6; i++) {
+      const currAnswer = document.getElementById(`answer${i}-preview`);
+      const currCheck = document.getElementById(`answer${i}-check-preview`);
+
+      currAnswer.classList.remove('d-block');
+      currAnswer.classList.add('d-none');
+      currCheck.classList.remove('bi-check');
+
+      ansArray.push(currAnswer);
+      ansArrayCheck.push(currCheck);
+    }
+
+    let correctAnswers = [];
+    for (let i = 0; i < currentAnswers.length; i++) {
+        if (currentAnswers[i].correct) {
+            correctAnswers.push(currentAnswers[i]);
+        }
+    }
+
+    // Set the text on answer buttons.
+    for (let i = 0;  i < questionsObj[currPosition].answers.length; i++) {
+      let ans = currentAnswers[i];
+      ansArray[i].classList.remove('d-none');
+      ansArray[i].classList.add('d-block');
+
+      let ansText = ansArray[i].querySelector('p');
+      ansText.textContent = ans.content;
+
+      if (correctAnswers.includes(ans)) {
+        ansArrayCheck[i].classList.add('bi-check');
+      }
+    }
+  }

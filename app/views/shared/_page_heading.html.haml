@@ -1,0 +1,7 @@
+.display-4.text-center.mt-3
+  .text-primary.fw-semibold.d-flex.d-inline-flex
+    #{text}&nbsp;
+    - if icon.eql? 'bi-quora'
+      = show_svg('filetype-quiz.svg', height: '4rem', width: '4rem', style: 'fill: var(--bs-primary);')
+    - else
+      .bi{ class: icon }

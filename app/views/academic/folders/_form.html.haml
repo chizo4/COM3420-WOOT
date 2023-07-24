@@ -1,0 +1,9 @@
+= simple_form_for(resource, form_attributes.merge(wrapper: :vertical_form)) do |f|
+  = render 'shared/errors', resource:
+  .card.h-100.border-white
+    .card-body.text-center
+      .mb-3
+        = f.input :name, placeholder: 'Folder name...', label: false, id: 'folder_name'
+  .col-11.mx-auto.mb-2
+    .d-flex.justify-content-end
+      %button= render 'shared/button', text: submit_button_text, icon: 'bi-check-circle-fill'

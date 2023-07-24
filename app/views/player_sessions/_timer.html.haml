@@ -1,0 +1,33 @@
+- if question.present?
+  #countdown{ data: { paused: quiz_session.paused, value: question.time } }
+- else
+  #countdown{ data: { paused: quiz_session.paused, value: -1 } }
+
+:javascript
+    countdownDiv = document.getElementById('countdown');
+    pathName = window.location.pathname;
+
+    time = -1;
+    isPaused = (countdownDiv.dataset.paused === 'true');
+
+    interval = setInterval(function() {
+      if (pathName != window.location.pathname) {
+        clearInterval(interval);
+      }
+
+      time = Number(countdownDiv.dataset.value);
+      isPaused = (countdownDiv.dataset.paused === 'true');
+
+      if (time >= 0 ) {
+          if (isPaused == false) {
+            time -= 0.1;
+          }
+
+          // Display time with 1 decimal place.
+          countdownDiv.dataset.value = time.toFixed(1);
+
+          for (let i = 1; i <= 6; i++) {
+            document.getElementById('time-field' + i).value = time.toFixed(1);
+          }
+      }
+    }, 100); // interval time is 100 milliseconds

@@ -1,0 +1,8 @@
+= page_title 'Shared Resources'
+
+.content-container.text-center.mt-5.mb-4
+  = render 'shared/page_heading', text: "Quizzes shared with #{current_academic.givenname}", icon: 'bi-share-fill'
+
+.row
+  .col-12.col-md-10.mx-auto.mb-4
+    = render 'shared_table', shared_resources: @shared_resources

@@ -1,0 +1,12 @@
+= page_title 'Create Folder'
+
+%main.container
+  = turbo_frame_tag 'folder_modal' do
+    %h3.modal-header.bg-primary
+      = link_to :back, data: { turbo_frame: '_top' } do
+        .bi.bi-x-lg.position-absolute.top-0.end-0.p-3.text-white
+      .mx-auto.fw-semibold.d-flex.d-inline-flex.text-white
+        Create Folder&nbsp;
+        .bi.bi-folder-fill
+    .modal-body
+      = render 'form', resource: @folder, form_attributes: { url: academic_folders_path }, submit_button_text: 'Create'

@@ -1,0 +1,4 @@
+.row.mb-4.text-center.position-fixed.bottom-0.end-0
+  .col-sm.mx-4
+    = link_to new_academic_quiz_question_path(quiz), data: { turbo_frame: 'question_modal' } do
+      = render 'shared/button', text: 'Add', icon: 'bi-plus-circle-fill'

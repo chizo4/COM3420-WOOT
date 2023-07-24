@@ -1,0 +1,75 @@
+inherits_from: .haml-lint_todo.yml
+
+exclude:
+  - 'vendor/gems/**/*'
+
+linters:
+  ConsecutiveComments:
+    enabled: false 
+
+  FinalNewline:
+    enabled: false
+
+  IdNames:
+    enabled: true
+    exclude:
+      - app/views/shared/*
+
+  RepeatedId:
+    exclude: 
+      - app/views/player_sessions/_timer.html.haml
+      - app/views/academic/quiz_sessions/_timer.html.haml
+      - app/views/player_sessions/show.html.haml
+      - app/views/academic/quiz_sessions/show.html.haml
+      - app/views/academic/quizzes/preview.html.haml
+
+  InlineStyles:
+    enabled: false
+
+  InstanceVariables:
+    enabled: true
+
+  LineLength:
+    enabled: false
+
+  MultilinePipe:
+    enabled: true
+    exclude:
+      - app/views/devise/**/*
+
+  ViewLength:
+    enabled: false
+    
+  RuboCop:
+    enabled: true
+    config_file: .rubocop.yml
+    ignored_cops:
+      - Style/IdenticalConditionalBranches
+      - Layout/EmptyLineAfterGuardClause
+      - Lint/BlockAlignment
+      - Lint/EndAlignment
+      - Lint/Void
+      - Layout/AlignHash
+      - Layout/AlignParameters
+      - Layout/ArgumentAlignment
+      - Layout/CaseIndentation
+      - Layout/ElseAlignment
+      - Layout/EndOfLine
+      - Layout/FirstHashElementIndentation
+      - Layout/HashAlignment
+      - Layout/IndentationWidth
+      - Layout/LineLength
+      - Layout/ParameterAlignment
+      - Layout/TrailingBlankLines
+      - Layout/TrailingEmptyLines
+      - Layout/TrailingWhitespace
+      - Metrics/BlockLength
+      - Metrics/BlockNesting
+      - Metrics/LineLength
+      - Naming/FileName
+      - Style/FrozenStringLiteralComment
+      - Style/IfUnlessModifier
+      - Style/Next
+      - Style/TernaryParentheses
+      - Style/WhileUntilModifier
+      - Lint/FloatComparison

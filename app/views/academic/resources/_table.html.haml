@@ -1,0 +1,25 @@
+.card.rounded-5.p-4.bg-light
+  .row.row-cols-2.row-cols-md-4.row-cols-lg-5
+    - resources.each do |resource|
+      .col.text-center.my-4{ 'data-bs-placement' => 'top', 'data-bs-toggle' => 'tooltip', title: resource.name }
+        = link_to resource.instance_of?(Folder) && academic_folder_path(resource) || academic_quiz_path(resource) do
+          - if resource.instance_of?(Folder)
+            .bi.text-primary.mx-5.bi-folder-fill.h-75{ style: 'font-size: 6rem; cursor: pointer;' }
+          - else
+            = show_svg('filetype-quiz.svg', class: 'h-75 mx-5', style: 'height: 6rem; width: 6rem; fill: var(--bs-primary);')
+        .text-center.fw-bolder{ style: 'position: relative; bottom: 0.5rem;' }
+          .d-flex.d-inline-flex
+            = resource.name
+            &nbsp;
+            %h5
+              - if resource.instance_of?(Folder)
+                = button_to '', academic_folder_path(resource), method: :delete, form: { data: { turbo_confirm: "Are you sure to delete this #{resource.class.name}?" } }, class: 'bi bi-trash-fill text-primary', id: "DelRes#{resource.id}"
+              - else
+                = render 'shared/quiz_dropdown', resource:, current_path:
+  - if resources.none?
+    - if params[:query].present?
+      .text-muted.text-center.fs-5.m-3
+        There are no quizzes matching the current search!
+    - else
+      .text-muted.text-center.fs-5.m-3
+        You have not created any quizzes yet!

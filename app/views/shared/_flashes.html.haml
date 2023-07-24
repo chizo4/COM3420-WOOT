@@ -1,0 +1,12 @@
+- if flash.present?
+  .container-fluid.flash-messages.mt-3
+  - flash.each do |message_type, message|
+    .mx-auto.alert.alert-dismissible.fade.show.text-center{ role: 'alert', style: 'width: 75%;', class: "alert-#{message_type == 'notice' ? 'primary' : 'danger'}" }
+      .d-flex.d-inline-flex.fw-semibold.my-auto
+        .bi.bi-chat-dots-fill &nbsp;&nbsp;
+        %strong= message
+      %button.btn-close{ 'id' => 'flash-close-button', 'aria-label' => 'Close', 'data-bs-dismiss' => 'alert', :type => 'button' }
+      :javascript
+        setTimeout(function() {
+            document.getElementById("flash-close-button").click();
+        }, 3000);

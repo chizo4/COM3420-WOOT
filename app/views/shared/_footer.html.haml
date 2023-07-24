@@ -1,0 +1,8 @@
+%footer.footer.mt-auto.py-1
+  .container
+    .text-center.fw-bold
+      = link_to 'Accessibility', accessibility_path(filename: 'Accessibility Statement for WOOT'), class: 'link-primary', target: '_blank'
+      &nbsp;|&nbsp;
+      = link_to 'Help Documentation', help_path(filename: 'Team 22 - WOOT User Documentation'), class: 'link-primary', target: '_blank'
+      %br
+      Copyright © WOOT (Team 22) #{Time.zone.today.year}

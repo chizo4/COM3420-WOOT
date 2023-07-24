@@ -1,0 +1,32 @@
+= simple_form_for(quiz, url: academic_quiz_sharing_path(current_path:)) do |f|
+  -# = render 'shared/errors', resource:
+  .input-group
+    .flex-grow-1
+      = f.input :academic_email, as: :string, input_html: { value: '' }, 'aria-describedby' => 'button-addon', placeholder: 'Academics email...', label: false, id: 'AcademicEmail'
+    = f.submit 'Share', class: 'btn btn-primary text-white button-addon'
+
+- if quiz.sharing.any?
+  %table.table.table-striped.mt-3.p-1
+    %thead
+      %tr
+        %th.align-middle.text-center{ scope: 'col' } Name
+        %th.align-middle.text-center{ scope: 'col' } Email
+        %th.align-middle.text-center.float-end{ scope: 'col' } Action
+    %tbody
+      - quiz.sharing.each do |sharing|
+        %tr
+          %th.align-middle.text-center{ scope: 'row' }
+            = sharing.name
+          %th.align-middle.text-center{ scope: 'row' }
+            = sharing.email.to_s
+          %td
+            .btn-toolbar.float-end
+              = button_to academic_quiz_sharing_path(quiz, academic_email: sharing.email, current_path:), method: :delete, form: { data: { turbo_confirm: "Are you sure to unshare with: #{sharing.name}?" } } do
+                .btn.btn-primary.border-0.rounded-5.py-2.px-3.text-white
+                  .d-none
+                    Delete
+                  .bi.bi-trash-fill
+
+- if quiz.sharing.none?
+  .text-muted.text-center.m-3
+    You have not shared this quiz with anyone yet!

@@ -1,0 +1,19 @@
+.row.mx-auto.w-75.w-lg-50.my-3{ style: 'max-width: 1200px;' }
+  .col-sm.mb-1.my-auto
+    .d-inline-block.rounded-5.bg-primary.py-3.px-4
+      %h4.d-flex.d-inline-flex.fw-semibold.mx-auto.my-auto.text-white
+        .bi.bi-people-fill
+        &nbsp;&nbsp;Players:&nbsp;
+        #player-count= count
+  .col-sm.mb-1.my-auto
+    .mx-auto{ style: 'max-width: 300px;' }
+      = link_to root_path do
+        = image_pack_tag 'woot_logo.svg', class: 'img-fluid'
+  .col-sm.mb-1.my-auto.d-flex.justify-content-end
+    .d-inline-block.rounded-5.bg-primary.py-3.px-4
+      %h4.d-flex.d-inline-flex.fw-semibold.mx-auto.my-auto.text-white
+        .bi.bi-qr-code
+        &nbsp;&nbsp;Code:&nbsp;
+        = session_code
+
+.border-primary.border-bottom.border-2.mx-4

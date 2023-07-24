@@ -1,0 +1,79 @@
+= page_title @quiz_session.quiz.name
+
+%div{ id: "quiz_session_#{@quiz_session.id}" }
+  - if @quiz_session.position.zero?
+    .d-block#waiting-animation
+      = render 'shared/animated_bg'
+  - else
+    .d-none#waiting-animation
+      = render 'shared/animated_bg'
+
+  .d-none#confetti-animation
+    = render 'shared/confetti'
+
+  = render 'game_topbar', count: @player_sessions.count.to_s, session_code: @quiz_session.code
+
+  .text-center#waiting-title
+    .my-5= render 'instructions', quiz_session: @quiz_session
+
+  = render 'timer', quiz_session: @quiz_session, question: @question
+
+  = render 'question_with_answers', quiz_session: @quiz_session, question: @question, answers: @answers, icons: %w[triangle square circle star pentagon heart]
+
+  - if (@quiz_session.position > @quiz_session.quiz.questions_length) || (@quiz_session.position % 1).round(2) == 0.66
+    .d-block#leaderboard
+      = render 'leaderboard', player_sessions: @player_sessions
+  - else
+    .d-none#leaderboard
+      = render 'leaderboard', player_sessions: @player_sessions
+
+
+  %br/
+
+  = render 'action_buttons', quiz_session: @quiz_session
+
+  :javascript
+      countdownDiv = document.getElementById('countdown');
+      nextButton = document.getElementById('next-button');
+      pathName = window.location.pathname;
+
+      time = -1;
+      isPaused = (countdownDiv.dataset.paused === 'true');
+
+      interval = setInterval(function() {
+        if (pathName != window.location.pathname)
+          clearInterval(interval);
+        time = Number(countdownDiv.dataset.value);
+        isPaused = (countdownDiv.dataset.paused === 'true');
+
+        if (time >= 0 ) {
+          if (isPaused == false) {
+            time--;
+          }
+
+          countdownDiv.dataset.value = time;
+          countdownDiv.textContent = time;
+
+          if (time === 0) {
+            nextButton.click();
+          }
+        }
+      }, 1000);
+
+      pauseButton = document.getElementById('pause-button');
+      pauseButtonText = document.getElementById('pause-button-text');
+      pauseButtonIcon = document.getElementById('pause-button-icon');
+
+      pauseButton.addEventListener('click', function() {
+        if (!isPaused) {
+            pauseButtonText.textContent = 'Play  ';
+            pauseButtonIcon.classList.remove('bi-pause-circle-fill');
+            pauseButtonIcon.classList.add('bi-play-circle-fill');
+            isPaused = true;
+        } else {
+            pauseButtonText.textContent = 'Pause  ';
+            pauseButtonIcon.classList.remove('bi-play-circle-fill');
+            pauseButtonIcon.classList.add('bi-pause-circle-fill');
+            isPaused = false;
+        }
+      });

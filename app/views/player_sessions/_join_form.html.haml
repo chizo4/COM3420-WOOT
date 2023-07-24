@@ -1,0 +1,17 @@
+.col-10.col-md-6.col-lg-4
+  = render 'shared/logo'
+  .card.rounded-5.mx-auto.text-white.bg-primary.border-0
+    = simple_form_for(QuizSession.new, url: 'player_join') do |f|
+      %h2.card-header.text-center.rounded-5.rounded-bottom.text-primary.bg-white
+        .d-flex.d-inline-flex.text-primary.fw-semibold.my-auto
+          Join Quiz&nbsp;&nbsp;
+          .bi.bi-person-fill
+      .card-body.text-center
+        .p-3.mx-4
+          %h4= f.label :code, 'Quiz Session Code'
+          = f.input :code, placeholder: 'Enter Session Code...', input_html: { class: 'rounded-5 text-center' }, label: false
+        .mt-2.p-1.text-center
+          %button.btn.bg-white.border-0.rounded-5.py-2.px-3{ type: :submit }
+            %h4.d-flex.d-inline-flex.text-primary.fw-semibold.my-auto
+              Join&nbsp;&nbsp;
+              .bi.bi-arrow-right-circle-fill

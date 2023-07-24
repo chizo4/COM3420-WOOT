@@ -1,0 +1,11 @@
+.card.rounded-5.p-4.bg-light
+  .row.row-cols-2.row-cols-md-4.row-cols-lg-5
+    - shared_resources.each do |resource|
+      .col.text-center.my-4{ 'data-bs-placement' => 'top', 'data-bs-toggle' => 'tooltip', title: resource.name }
+        = button_to academic_quiz_sessions_path(quiz_id: resource), method: :post, form: { data: { turbo_confirm: "Are you sure to start this #{resource.class.name}?" } } do
+          = show_svg('filetype-quiz.svg', class: 'h-75 mx-5', style: 'height: 6rem; width: 6rem; fill: var(--bs-primary);')
+        .text-center.fw-bolder.d-flex.d-inline-flex{ style: 'position: relative; bottom: 0.5rem;' }
+          = resource.name
+  - if shared_resources.none?
+    .text-muted.text-center.fs-5.m-3
+      No quizzes have been shared with you yet!

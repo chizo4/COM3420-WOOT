@@ -1,0 +1,55 @@
+.card.rounded-4.bg-primary.border-0
+  - if questions.any?
+    %table.table.table-striped.p-1
+      %thead
+        %tr.text-white.text-center
+          %th.col-2.py-3{ scope: 'col' }
+            %h5.my-auto Position
+          %th.col-6.py-3{ scope: 'col' }
+            %h5.my-auto Content
+          %th.col-1.py-3{ scope: 'col' }
+            %h5.my-auto Time
+          %th.col-1.py-3{ scope: 'col' }
+            %h5.my-auto Poll
+          %th.col-2.py-3{ scope: 'col' }
+            %h5.my-auto Actions
+      %tbody
+        - questions.each_with_index do |question, index|
+          %tr{ class: index.even? ? 'bg-white' : 'bg-light' }
+            %th.text-center.align-middle{ scope: 'row' }
+              .d-flex.d-inline-flex
+                &nbsp;
+                = button_to decrease_position_academic_quiz_questions_path(quiz_id: quiz.id, id: question.id), method: :post do
+                  %button.border-0.rounded-5.fs-3{ class: index.zero? ? 'text-muted' : 'text-primary', type: 'submit' }
+                    .bi.bi-caret-up-fill
+                .my-auto.ps-1.fs-3
+                  = question.position
+                &nbsp;
+                = button_to increase_position_academic_quiz_questions_path(quiz_id: quiz.id, id: question.id), method: :post do
+                  %button.border-0.rounded-5.fs-3{ class: (index == questions.length - 1) ? 'text-muted' : 'text-primary', type: 'submit' }
+                    .bi.bi-caret-down-fill
+            %th.align-middle{ scope: 'row' }
+              = question.content
+            %th.align-middle.text-center{ scope: 'row' }
+              = question.time
+            %th.align-middle.text-center{ scope: 'row' }
+              - if question.poll?
+                .bi.bi-check-circle.text-primary{ style: 'font-size: 1.5rem;' }
+              - else
+                .bi.bi-x-circle.text-primary{ style: 'font-size: 1.5rem;' }
+            %th.align-middle.text-center{ scope: 'row' }
+              .d-flex.d-inline-flex
+                = link_to edit_academic_quiz_question_path(quiz, question), data: { turbo_frame: 'question_modal' } do
+                  .btn.btn-primary.border-0.rounded-5.py-2.px-3.text-white
+                    .d-none
+                      Edit
+                    .bi.bi-pencil-square
+                &nbsp;
+                = button_to academic_quiz_question_path(quiz, question), id: "DelQ#{question.id}", method: :delete, form: { data: { turbo_confirm: 'Are you sure to delete this Question?' } } do
+                  .btn.btn-primary.border-0.rounded-5.py-2.px-3.text-white
+                    .d-none
+                      Delete
+                    .bi.bi-trash-fill
+  - if questions.none?
+    .text-white.text-center.fs-5.m-3
+      You have not added any questions yet!

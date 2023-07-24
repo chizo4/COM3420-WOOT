@@ -1,0 +1,9 @@
+- if resource.errors.any?
+  .alert.alert-danger.col-11.mx-auto
+    .text-center
+      .d-flex.d-inline-flex
+        .bi.bi-exclamation-triangle-fill
+        %h5 &nbsp;Correct the errors listed below:
+    %ul
+      - resource.errors.full_messages.each do |error_message|
+        %li= error_message

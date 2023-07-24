@@ -1,0 +1,14 @@
+= simple_form_for(resource, form_attributes.merge(wrapper: :vertical_form)) do |f|
+  = render 'shared/errors', resource:
+  .card.h-100.text-center.border-white
+    .card-body
+      - if form_options.include? 'rename'
+        = f.input :name, placeholder: 'Quiz name...', label: false, id: 'quiz_name'
+        %br/
+      - if form_options.include? 'move'
+        .form-group.mb-3
+          %label.form-label.fw-bold.text-muted.text-start.w-100 If you wish, pick a folder below:
+          = f.select :folder_id, options_for_select(folder_options, selected: ([nil, ''].include? current_folder_id) ? '' : current_folder_id), {}, class: 'form-select'
+  .col-11.mx-auto.mb-2
+    .d-flex.justify-content-end
+      %button= render 'shared/button', text: submit_button_text, icon: 'bi-check-circle-fill'

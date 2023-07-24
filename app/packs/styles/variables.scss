@@ -1,0 +1,83 @@
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
+
+// List of main colours used
+$primary: #440099;
+$light: #ece6f5;
+$answer1: #e7004c;
+$answer2: $primary;
+$answer3: #ff9664;
+$answer4: #981f92;
+$answer5: #daa8e2;
+$answer6: #131e29;
+
+$theme-colors: (
+  "primary":    $primary,
+  "secondary":  $secondary,
+  "success":    $success,
+  "info":       $info,
+  "warning":    $warning,
+  "danger":     $danger,
+  "light":      $light,
+  "dark":       $dark,
+  "answer1":    $answer1,
+  "answer2":    $answer2,
+  "answer3":    $answer3,
+  "answer4":    $answer4,
+  "answer5":    $answer5,
+  "answer6":    $answer6,
+);
+
+.bg-light-alternate {
+  background-color: $light;
+}
+
+.bg-light-alternate:nth-child(odd) {
+  background-color: $white;
+}
+
+.h-2rem {
+  height: 2rem;
+}
+
+.h-5rem {
+  height: 5rem;
+}
+
+.w-2rem {
+  width: 2rem;
+}
+
+.w-5rem {
+  width: 5rem;
+}
+
+.bg-answer1-t {
+  pointer-events: none;
+  background-color: rgba(231,0,76,0.5);
+}
+
+.bg-answer2-t {
+  pointer-events: none;
+  background-color: rgba(68,0,153,0.5);
+}
+
+.bg-answer3-t {
+  pointer-events: none;
+  background-color: rgba(255,150,100,0.5);
+}
+
+.bg-answer4-t {
+  pointer-events: none;
+  background-color: rgba(152,31,146,0.5);
+}
+
+.bg-answer5-t {
+  pointer-events: none;
+  background-color: rgba(218,168,226,0.5);
+}
+
+.bg-answer6-t {
+  pointer-events: none;
+  background-color: rgba(19,30,41,0.5);
+}

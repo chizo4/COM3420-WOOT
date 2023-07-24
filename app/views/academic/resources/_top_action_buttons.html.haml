@@ -1,0 +1,9 @@
+.row.w-75.mx-auto.my-3
+  .col-12.col-md-3.text-center.my-2
+    = link_to new_academic_quiz_path(current_folder_id: '', form_show: %w[rename move]), data: { turbo_frame: 'quiz_modal' } do
+      = render 'shared/button', text: 'Create Quiz', icon: 'bi-file-earmark-play-fill'
+  .col-12.col-md-6.text-center.my-auto
+    = render 'shared/search_bar', path: academic_resources_path, text: 'Search for any quiz or folder...'
+  .col-12.col-md-3.text-center.my-2
+    = link_to new_academic_folder_path, data: { turbo_frame: 'folder_modal' } do
+      = render 'shared/button', text: 'Create Folder', icon: 'bi-folder-fill'

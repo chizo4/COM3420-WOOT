@@ -1,0 +1,12 @@
+= page_title 'Resources'
+
+= render 'academic/quizzes/modal'
+= render 'academic/folders/modal'
+= render 'academic/quizzes/sharing/modal'
+
+.mt-5= render 'shared/page_heading', text: "#{current_academic.givenname}'s Quizzes", icon: 'bi-file-earmark-check-fill'
+= render 'top_action_buttons'
+
+.row
+  .col-12.col-md-10.mx-auto.mb-4
+    = render 'table', resources: @resources, current_path: @current_path

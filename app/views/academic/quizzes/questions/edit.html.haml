@@ -1,0 +1,12 @@
+= page_title 'Edit Question'
+
+%main.container
+  = turbo_frame_tag 'question_modal' do
+    %h3.modal-header.bg-primary
+      = link_to :back, data: { turbo_frame: '_top' } do
+        .bi.bi-x-lg.position-absolute.top-0.end-0.p-3.text-white
+      .mx-auto.fw-semibold.d-flex.d-inline-flex.text-white
+        Update Question&nbsp;
+        .bi.bi-pencil-square
+    .modal-body
+      = render 'form', resource: @question, form_attributes: { url: academic_quiz_question_path(@quiz, @question) }, submit_button_text: 'Update'

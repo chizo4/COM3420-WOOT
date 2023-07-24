@@ -1,0 +1,49 @@
+!!!
+%html{ lang: 'en-GB' }
+  %head
+    %title= @page_title.nil? ? 'WOOT' : "#{@page_title} | WOOT"
+
+    %meta{ 'http-equiv': 'content-type', content: 'text/html; charset=utf-8' }
+    %meta{ 'http-equiv': 'X-UA-Compatible', content: 'IE=edge' }
+    %meta{ name: 'viewport', content: 'width=device-width, initial-scale=1.0, shrink-to-fit=no' }
+
+    %link{ href: '/favicon/apple-touch-icon.png', rel: 'apple-touch-icon', sizes: '180x180' }/
+    %link{ href: '/favicon/favicon-32x32.png', rel: 'icon', sizes: '32x32', type: 'image/png' }/
+    %link{ href: '/favicon/favicon-16x16.png', rel: 'icon', sizes: '16x16', type: 'image/png' }/
+    %link{ href: '/favicon/site.webmanifest', rel: 'manifest' }/
+
+    %link{ href: 'https://fonts.googleapis.com', rel: 'preconnect' }/
+    %link{ crossorigin: '', href: 'https://fonts.gstatic.com', rel: 'preconnect' }/
+    %link{ href: 'https://fonts.googleapis.com/css2?family=Ubuntu&display=swap', rel: 'stylesheet' }/
+
+    %meta{ content: '#da532c', name: 'msapplication-TileColor' }/
+    %meta{ content: '#ffffff', name: 'theme-color' }/
+
+    - if content_for(:description)
+      %meta{ content: content_for(:description), name: 'description' }
+
+    %title= ['Project', content_for(:title)].compact.join(' - ')
+
+    = csrf_meta_tags
+    = csp_meta_tag
+
+    = stylesheet_pack_tag 'styles', media: 'all'
+    = javascript_pack_tag 'application'
+
+  %body
+    .container-fluid.m-auto.d-flex.flex-column
+      %a.navbar-brand.d-flex.justify-content-center.mb-3{ href: '/' }
+        = image_pack_tag 'woot_logo.svg', style: 'height: 5rem;'
+      .card.rounded-5.col.w-sm-75.mx-auto.pt-2.text-white.text-center.bg-answer1
+        .card-body
+          .card-title.display-4.fw-bold
+            Error
+          .display-1.fw-bolder.text-light
+            = yield
+          .card-body.py-2.h4.mx-3
+            Oops! The page you are looking for cannot be found!
+          = link_to root_path do
+            = render 'shared/button', text: 'Visit WOOT Home', icon: 'bi-arrow-right-circle-fill'
+      .col.d-flex.justify-content-center.align-items-center.mt-4
+        = link_to new_academic_session_path do
+          = render 'shared/button', text: 'Sign In', icon: 'bi-arrow-right-circle-fill'

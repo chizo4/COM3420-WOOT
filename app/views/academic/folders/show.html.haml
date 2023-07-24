@@ -1,0 +1,20 @@
+= render 'modal'
+= render 'academic/quizzes/modal'
+= render 'academic/quizzes/sharing/modal'
+
+.mt-5= render 'shared/page_heading', text: @folder.name, icon: 'bi-folder-fill'
+
+.col-12.col-md-6.mx-auto.d-flex.justify-content-around.my-4
+  = link_to academic_resources_path(current_academic) do
+    = render 'shared/button', text: 'Back', icon: 'bi-arrow-left-circle-fill'
+  = link_to new_academic_quiz_path(current_folder_id: @folder.id, form_show: %w[rename move]), data: { turbo_frame: 'quiz_modal' } do
+    = render 'shared/button', text: 'Create Quiz', icon: 'bi-file-earmark-play-fill'
+  = link_to edit_academic_folder_path(@folder), data: { turbo_frame: 'folder_modal' } do
+    = render 'shared/button', text: 'Settings', icon: 'bi bi-gear-fill'
+
+.col-10.col-md-5.my-4.mx-auto
+  = render 'shared/search_bar', path: @current_path, text: 'Search for any quiz in this folder...'
+
+.row
+  .col-12.col-md-10.mx-auto.mb-4
+    = render 'academic/resources/table', resources: @quizzes, current_path: @current_path

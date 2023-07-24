@@ -1,0 +1,16 @@
+= page_title @quiz.name
+
+= render 'modal'
+= render 'academic/quizzes/questions/modal'
+= render 'academic/quizzes/sharing/modal'
+
+.mt-5.mb-4
+  = render 'shared/page_heading', text: @quiz.name, icon: 'bi-quora'
+
+= render 'action_buttons', quiz: @quiz
+
+.row.mb-4
+  .col-12.col-md-9.mt-1.mx-auto
+    = render 'questions', quiz: @quiz, questions: @questions
+
+= render 'bottom_action_buttons', quiz: @quiz

@@ -1,0 +1,12 @@
+= page_title 'Create Quiz'
+
+%main.container
+  = turbo_frame_tag 'quiz_modal' do
+    %h3.modal-header.bg-primary
+      = link_to :back, data: { turbo_frame: '_top' } do
+        .bi.bi-x-lg.position-absolute.top-0.end-0.p-3.text-white
+      .mx-auto.fw-semibold.d-flex.d-inline-flex.text-white
+        Create Quiz&nbsp;
+        .bi.bi-pencil-square
+    .modal-body
+      = render 'form', resource: @quiz, folders: @folders, current_folder_id: @current_folder_id, folder_options: @folder_options, form_options: @form_options, form_attributes: { url: academic_quizzes_path }, submit_button_text: 'Create'

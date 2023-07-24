@@ -1,0 +1,14 @@
+.row.mx-auto.text-center.w-75.w-lg-50{ style: 'max-width: 600px;' }
+  .col-sm.mb-1
+    = button_to academic_quiz_session_path(quiz_session), id: 'end-button', method: :delete, data: { turbo_confirm: 'Please confirm stopping the ongoing Quiz Session.' } do
+      = render 'shared/button', text: 'End', icon: 'bi-x-circle-fill'
+  .col-sm.mb-1.d-none#pause-button-container
+    = link_to academic_pause_path(id: quiz_session.id), id: 'pause-button', method: :post do
+      .btn.btn-primary.border-0.rounded-5.py-3.px-4.text-white#pause-button{ type: 'pause' }
+        %h5.d-flex.d-inline-flex.text-white.fw-semibold.my-auto
+          #pause-button-text Pause
+          &nbsp;&nbsp;
+          .bi.bi-pause-circle-fill#pause-button-icon
+  .col-sm.mb-1#next-button-container
+    = link_to academic_quiz_session_path(quiz_session), id: 'next-button', method: :patch do
+      = render 'shared/button', text: 'Next', icon: 'bi-arrow-right-circle-fill'

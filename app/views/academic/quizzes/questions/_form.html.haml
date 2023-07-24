@@ -1,0 +1,38 @@
+= simple_form_for(resource, form_attributes.merge(wrapper: :vertical_form)) do |f|
+  = render 'shared/errors', resource:
+  .card.border-white.h-100
+    .card-body.d-flex.flex-column
+      .mb-2.w-100.d-flex.flex-row.justify-content-between
+        .w-25.d-flex.d-inline-flex.my-auto
+          %h4.bi.bi-stopwatch-fill.text-primary.my-auto
+          = f.label :time, 'Time:', class: 'mx-1 my-auto'
+          = f.input :time, label: false, input_html: { min: 0, max: 3600, step: 1 }
+        .form-check.form-switch.d-flex.my-auto.w-25.d-flex.justify-content-end
+          %h4.bi.bi-file-bar-graph-fill.text-primary.my-auto
+          = f.label :poll, 'Poll:', class: 'form-check-label ms-1 me-5 my-auto'
+          = f.input_field :poll, as: :boolean, class: 'w-50 form-check-input', id: 'question_poll', style: 'height: 1.75rem;'
+      .mb-2
+        = f.input :content, label: false, placeholder: 'Question...'
+      .card.mt-2.w-100
+        %h5.card-header.text-center.text-white.bg-primary
+          Answers:
+        .card-body.mx-0.p-0
+          - unless resource.answers.any?
+            .text-center.text-muted.py-3
+              The question has no answers yet!
+          = f.simple_fields_for :answers do |a|
+            .row.col-12.mx-0.py-3{ class: a.index.even? ? 'bg-light' : 'bg-white' }
+              .col-1.form-check.form-switch.d-flex.my-auto.d-flex.justify-content-center
+                = a.input_field :correct, as: :boolean, class: 'form-check-input', id: "answer_correct_#{a.index + 1}"
+              .col-10.px-0
+                = a.input :content, label: false, placeholder: "Answer #{a.index + 1}..."
+              - if resource.persisted?
+                .col-1.d-flex.justify-content-center
+                  = button_tag type: 'submit', formmethod: 'post', id: "DelAns#{a.index + 1}", formaction: destroy_answer_academic_quiz_questions_path(id: f.object, answer_id: a.object) do
+                    .ms-1.btn.btn-primary.border-0.rounded-5.py-2.px-3.text-white
+                      .bi.bi-trash-fill
+  .col-12.mx-auto.mb-2.mt-2
+    .d-flex.justify-content-between.mx-3
+      = button_tag type: 'submit', formmethod: 'post', id: 'AddAns', formaction: add_answer_academic_quiz_questions_path(id: f.object) do
+        = render 'shared/button', text: 'Add answer', icon: 'bi-plus-circle-fill'
+      %button= render 'shared/button', text: submit_button_text, icon: 'bi-check-circle-fill'

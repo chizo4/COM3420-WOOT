@@ -1,0 +1,33 @@
+= render 'shared/animated_bg'
+
+= page_title 'Sign In'
+
+.d-flex.justify-content-center.align-items-center.mb-5{ style: 'height: 70vh;' }
+  .col-10.col-md-6.col-lg-4
+    = render 'shared/logo'
+    .card.rounded-5.mx-auto.text-white.bg-primary.border-0
+      = simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+        %h2.card-header.text-center.rounded-5.rounded-bottom.text-primary.bg-white
+          .d-flex.d-inline-flex.text-primary.fw-semibold.my-auto
+            Sign In&nbsp;&nbsp;
+            .bi.bi-person-fill
+        .card-body.text-center
+          .p-3.mx-3
+            %h4= f.label :username, 'University Username'
+            = f.input :username, autofocus: true, required: true, placeholder: 'Enter your username...', label: false, input_html: { class: 'rounded-5 text-center' }
+            %br
+            %h4= f.label :username, 'Password'
+            = f.input :password, required: true, placeholder: 'Enter your password...', label: false, input_html: { class: 'rounded-5 text-center' }
+          .mt-2.p-1.text-center
+            %button.btn.bg-white.border-0.rounded-5.py-2.px-3{ type: :submit }
+              %h4.d-flex.d-inline-flex.text-primary.fw-semibold.my-auto
+                Sign In&nbsp;&nbsp;
+                .bi.bi-arrow-right-circle-fill
+          = render 'devise/shared/links'
+
+- 2.times do
+  %br/
+
+.text-center.mb-3
+  = link_to root_path do
+    = render 'shared/button', text: 'Home', icon: 'bi-house'

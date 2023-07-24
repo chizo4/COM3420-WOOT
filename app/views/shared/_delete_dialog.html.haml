@@ -1,0 +1,20 @@
+%dialog#turbo-confirm
+  .overlay.d-flex.justify-content-center.align-items-center
+    .card.rounded.border-0.col-4
+      %form{ method: 'dialog' }
+        %h3.card-header.bg-primary.text-center.text-white.pt-3.rounded-top
+          .bi.bi-exclamation-triangle-fill{ style: 'font-size: 5rem;' }
+        .mt-1.fw-semibold.my-2.px-4.w-100.text-center
+          %p.my-auto.fs-5.py-1 Are you sure to delete?
+        .card-body.bg-light.rounded-bottom
+          .col-12.d-flex.justify-content-around
+            %button.btn.btn-secondary.border-0.rounded-5.py-2.px-3.text-white{ value: 'cancel' }
+              %h5.d-flex.d-inline-flex.text-white.fw-semibold.my-auto
+                Cancel
+                &nbsp;
+                .bi.bi-x-circle-fill
+            %button.btn.btn-danger.border-0.rounded-5.py-2.px-3.text-white{ value: 'confirm' }
+              %h5.d-flex.d-inline-flex.text-white.fw-semibold.my-auto
+                Confirm
+                &nbsp;
+                .bi.bi-check-circle-fill

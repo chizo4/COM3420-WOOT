@@ -1,0 +1,45 @@
+!!!
+%html{ lang: 'en-GB' }
+  %head
+    %title= @page_title.nil? ? 'WOOT' : "#{@page_title} | WOOT"
+
+    %meta{ 'http-equiv': 'content-type', content: 'text/html; charset=utf-8' }
+    %meta{ 'http-equiv': 'X-UA-Compatible', content: 'IE=edge' }
+    %meta{ name: 'viewport', content: 'width=device-width, initial-scale=1.0, shrink-to-fit=no' }
+
+    %link{ href: '/favicon/apple-touch-icon.png', rel: 'apple-touch-icon', sizes: '180x180' }/
+    %link{ href: '/favicon/favicon-32x32.png', rel: 'icon', sizes: '32x32', type: 'image/png' }/
+    %link{ href: '/favicon/favicon-16x16.png', rel: 'icon', sizes: '16x16', type: 'image/png' }/
+    %link{ href: '/favicon/site.webmanifest', rel: 'manifest' }/
+
+    %link{ href: 'https://fonts.googleapis.com', rel: 'preconnect' }/
+    %link{ crossorigin: '', href: 'https://fonts.gstatic.com', rel: 'preconnect' }/
+    %link{ href: 'https://fonts.googleapis.com/css2?family=Ubuntu&display=swap', rel: 'stylesheet' }/
+
+    %meta{ content: '#da532c', name: 'msapplication-TileColor' }/
+    %meta{ content: '#ffffff', name: 'theme-color' }/
+
+    - if content_for(:description)
+      %meta{ content: content_for(:description), name: 'description' }
+
+    %title= ['Project', content_for(:title)].compact.join(' - ')
+
+    = csrf_meta_tags
+    = csp_meta_tag
+
+    = stylesheet_pack_tag 'styles', media: 'all'
+    = javascript_pack_tag 'application'
+
+  %body
+    %header
+      - if academic_signed_in? && !params[:controller].include?('quiz_sessions')
+        = render 'shared/academic_topbar'
+
+    %main
+      = render 'shared/flashes'
+      = render 'shared/delete_dialog'
+
+      .container-fluid.mt-4
+        = yield
+
+    = render 'shared/footer'

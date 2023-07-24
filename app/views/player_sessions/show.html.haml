@@ -1,0 +1,27 @@
+- unless academic_signed_in?
+  = render 'player_topbar'
+
+%div{ id: "quiz_session_#{@quiz_session.id}" }
+  .text-center
+    .text-primary.fw-semibold.d-block.display-6.mb-2.pt-4#player-answer-title
+      - if @quiz_session.position.zero? || @quiz_session.position % 1 != 0
+        Waiting...
+      - elsif @question.present?
+        Q#{@question.position}. Select the correct answer.
+    .d-block.text-primary.bi.bi-hourglass-bottom{ id: 'player-answer-icon', style: 'font-size: 6rem;' }
+
+    .d-none.mt-5#player-session-content
+      .text-primary.fw-semibold.d-block.d-inline-flex.display-6.pb-4{ id: "answer_correct_icon_#{@player_session.id}", style: 'font-size: 6rem;' }
+      %br/
+      .text-primary.fw-semibold.d-block.d-inline-flex.display-6{ id: "answer_correct_#{@player_session.id}" }
+      %br/
+      .text-primary.fw-semibold.d-block.d-inline-flex.display-6{ id: "player_points_#{@player_session.id}" }
+
+    - if @quiz_session.position.zero? || @quiz_session.position % 1 != 0
+      .container.d-none#answers-list
+        = render 'answers_list', answers: @answers, quiz_session: @quiz_session, question: @question, player_session: @player_session
+    - else
+      .container.d-block#answers-list
+        = render 'answers_list', answers: @answers, quiz_session: @quiz_session, question: @question, player_session: @player_session
+
+  = render 'player_sessions/timer', quiz_session: @quiz_session, question: @question

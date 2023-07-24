@@ -1,0 +1,6 @@
+.btn-group.dropright
+  .bi.bi-three-dots-vertical.text-primary{ 'aria-expanded' => 'false', 'aria-haspopup' => 'true', 'data-bs-toggle' => 'dropdown', type: 'button' }
+  .dropdown-menu.rounded-3.border-primary{ 'aria-labelledby' => 'dropdownMenuButton' }
+    = link_to ' Move', edit_academic_quiz_path(resource, move: 'move', current_path:), data: { turbo_frame: 'quiz_modal' }, class: 'pb-2 bi bi-folder-symlink-fill text-primary dropdown-item border-bottom'
+    = link_to ' Share', edit_academic_quiz_sharing_path(resource, id: resource, current_path:), data: { turbo_frame: 'share_modal' }, class: 'py-2 bi bi-share-fill text-primary dropdown-item border-bottom'
+    = button_to ' Delete', academic_quiz_path(resource), method: :delete, form: { data: { turbo_confirm: "Are you sure to delete this #{resource.class.name}?" } }, class: 'pt-2 bi bi-trash-fill text-primary dropdown-item'

@@ -1,0 +1,4 @@
+= render 'shared/animated_bg'
+
+.d-flex.justify-content-center.align-items-center{ style: 'height: 70vh;' }
+  = render 'name_form', resource: @player_session, form_attributes: { url: player_sessions_path(quiz_session_id: params[:quiz_session_id]) }

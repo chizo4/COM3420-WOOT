@@ -1,0 +1,16 @@
+.row.mx-auto.text-center.w-75.my-3{ style: 'max-width: 900px;' }
+  .col-md.mb-2
+    = link_to academic_quiz_sessions_path(quiz_id: quiz), method: :post do
+      = render 'shared/button', text: 'Start', icon: 'bi-play-circle-fill'
+  .col-md.mb-2
+    = link_to academic_quiz_preview_path(quiz) do
+      = render 'shared/button', text: 'Preview', icon: 'bi-eye-fill'
+  .col-md.mb-2
+    = link_to edit_academic_quiz_sharing_path(quiz), data: { turbo_frame: 'share_modal' } do
+      = render 'shared/button', text: 'Share', icon: 'bi bi-share-fill'
+  .col-md.mb-2
+    = link_to edit_academic_quiz_path(quiz), data: { turbo_frame: 'quiz_modal' } do
+      = render 'shared/button', text: 'Settings', icon: 'bi bi-gear-fill'
+  .col-md.mb-2
+    = button_to academic_quiz_path(quiz), method: :delete, id: 'DelQuiz', form: { data: { turbo_confirm: 'Are you sure to delete this Quiz?' } } do
+      = render 'shared/button', text: 'Delete', icon: 'bi-trash-fill'

@@ -1,0 +1,13 @@
+- if quiz_session.position.zero?
+  %br
+  .fw-semibold.d-flex.d-inline-flex.display-2
+    - if quiz_session.position.zero?
+      .text-black Join at:&nbsp;
+      .text-primary woot.com
+  %br
+  .col-10.col-md-6.col-lg-4.mx-auto.mt-2
+    .card.rounded-5.bg-primary.px-2.py-4
+      %h1.text-center{ style: 'color: #a1ded2;' }
+        Enter the session code:
+      .display-4.text-center.text-white.fw-bold
+        = quiz_session.code

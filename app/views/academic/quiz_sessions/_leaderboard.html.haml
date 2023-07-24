@@ -1,0 +1,24 @@
+.row
+  .col-12.col-md-7.mt-1.mb-5.mx-auto
+    .card.rounded-4.bg-primary.border-0
+      %table.table.table-striped.p-1#leaderboard-table
+        %thead
+          %tr.text-white.text-center
+            %th.py-3.col-1{ scope: 'col' }
+              %h5.my-auto Position
+            %th.py-3.col-5{ scope: 'col' }
+              %h5.my-auto Username
+            %th.py-3.col-1{ scope: 'col' }
+              %h5.my-auto Score
+          %tbody.bg-white
+            - count = 1
+            - player_sessions.sort_by { |player_session| [-player_session.score, player_session.id] }.reverse.each do |player_session|
+              %tr
+                %th{ scope: 'row' }
+                  = count
+                %th{ scope: 'row' }
+                  = player_session.username
+                %th{ scope: 'row' }
+                  = player_session.score
+                %th{ scope: 'row' }
+              - count += 1

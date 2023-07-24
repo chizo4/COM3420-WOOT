@@ -1,0 +1,4 @@
+.modal{ 'data-action' => 'turbo:frame-load->quiz-modal#open turbo:submit-end->quiz-modal#close turbo:submit-end->quiz-modal#next', 'data-controller' => 'quiz-modal', tabindex: '-1' }
+  .modal-dialog
+    .modal-content
+      = turbo_frame_tag 'quiz_modal'

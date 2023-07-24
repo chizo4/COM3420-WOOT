@@ -1,0 +1,19 @@
+
+.col-11.col-md-6.col-lg-4
+  = render 'shared/logo'
+  .card.rounded-5.mx-auto.text-white.bg-primary.border-0
+    = simple_form_for(resource) do |f|
+      %h3.card-header.text-center.rounded-5.rounded-bottom.text-primary.bg-white
+        .d-flex.d-inline-flex.text-primary.fw-semibold.my-auto
+          Add a Nickname & Play&nbsp;
+          .bi.bi-play-circle-fill
+      .card-body.text-center
+        .p-3.mx-4
+          %h4= f.label :username, 'Nickname'
+          = f.input :username, placeholder: 'Enter Nickname...', input_html: { class: 'rounded-5 text-center' }, label: false
+          = f.hidden_field :quiz_session_id, value: params[:quiz_session_id]
+        .mt-2.p-1.text-center
+          %button.btn.btn-light.border-0.rounded-5.py-2.px-3{ type: :submit }
+            %h5.d-flex.d-inline-flex.text-primary.fw-semibold.my-auto
+              Let's Play!&nbsp;&nbsp;
+              .bi.bi-arrow-right-circle-fill

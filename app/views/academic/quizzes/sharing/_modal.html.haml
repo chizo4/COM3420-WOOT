@@ -1,0 +1,4 @@
+.modal{ 'data-action' => 'turbo:frame-load->share-modal#open turbo:submit-end->share-modal#close turbo:submit-end->share-modal#next', 'data-controller' => 'share-modal', tabindex: '-1' }
+  .modal-dialog
+    .modal-content
+      = turbo_frame_tag 'share_modal'

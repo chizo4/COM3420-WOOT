@@ -1,0 +1,11 @@
+.text-center.text-primary.fw-semibold.d-none.mt-3#timer
+  .display-2.d-flex.d-inline-flex.fw-semibold
+    .bi.bi-stopwatch-fill
+    &nbsp;
+    - if question.present?
+      #countdown{ data: { paused: quiz_session.paused, value: question.time } }
+        = question.time
+    - else
+      #countdown{ data: { paused: quiz_session.paused, value: -1 } }
+        = -1
+

@@ -1,0 +1,16 @@
+= page_title 'Menu'
+= render 'academic/quizzes/modal'
+
+.content-container.text-center.mt-5
+  = render 'shared/page_heading', text: "Welcome to WOOT, #{current_academic.name}!", icon: 'bi-emoji-smile-fill'
+
+.row.mx-4.my-5{ style: 'min-height: 350px;' }
+  .col.d-flex.justify-content-around.my-3.my-lg-auto
+    = link_to new_academic_quiz_path, data: { turbo_frame: 'quiz_modal' } do
+      = render 'menu_button', text: 'Create Quiz', icon: 'bi bi-pencil-fill'
+  .col.d-flex.justify-content-around.my-3.my-lg-auto
+    = link_to academic_resources_path(current_academic) do
+      = render 'menu_button', text: 'My Quizzes', icon: 'bi bi-person-fill'
+  .col.d-flex.justify-content-around.my-3.my-lg-auto
+    = link_to academic_shared_path(current_academic) do
+      = render 'menu_button', text: 'Shared Quizzes', icon: 'bi bi-people-fill'

@@ -1,0 +1,14 @@
+= page_title 'Home'
+
+= render 'shared/animated_bg'
+
+.d-flex.justify-content-center.align-items-center{ style: 'height: 70vh;' }
+  = render 'join_form'
+
+- 2.times do
+  %br/
+
+.text-center.mb-3
+  - unless current_academic
+    = link_to new_academic_session_path do
+      = render 'shared/button', text: 'Sign In', icon: 'bi-box-arrow-in-right'

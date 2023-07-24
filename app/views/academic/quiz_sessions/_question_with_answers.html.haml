@@ -1,0 +1,23 @@
+.text-center
+  .my-3.text-black.fw-semibold.d-flex.d-inline-flex.display-5#quiz-session-question
+    - if (quiz_session.position > quiz_session.quiz.questions_length) || (quiz_session.position % 1).round(2) == 0.66
+      Leaderboard
+    - elsif quiz_session.position.positive?
+      #{quiz_session.position.to_i}. #{quiz_session.quiz.questions[quiz_session.position - 1].content}
+
+.mx-auto.text-center.col-10
+  - 6.times do |i|
+    - if question.present? && answers[i].present? && (quiz_session.position <= quiz_session.quiz.questions_length) && (quiz_session.position % 1).round(2) != 0.66
+      .d-block.btn.rounded-5.py-2.my-2.mx-1.mx-lg-5.bi.text-white{ id: "answer#{i + 1}", class: "bg-answer#{i + 1}" }
+        %h4.d-flex.d-inline-flex.text-white.fw-semibold.text-white.my-auto
+          .bi{ id: "answer#{i + 1}-check", style: 'font-size: 2.5rem;' }
+          .my-auto.bi{ class: "bi-#{icons[i]}-fill" }
+          &nbsp;&nbsp;
+          %p.my-auto= answers[i].content
+    - else
+      .d-none.btn.rounded-5.py-2.my-2.mx-1.mx-lg-5.bi.text-white{ id: "answer#{i + 1}", class: "bg-answer#{i + 1}" }
+        %h4.d-flex.d-inline-flex.text-white.fw-semibold.text-white.my-auto.my-auto
+          .bi{ id: "answer#{i + 1}-check", style: 'font-size: 2.5rem;' }
+          .my-auto.bi{ class: "bi-#{icons[i]}-fill" }
+          &nbsp;&nbsp;
+          %p.my-auto

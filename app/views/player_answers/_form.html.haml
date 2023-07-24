@@ -1,0 +1,25 @@
+= simple_form_for(resource) do |f|
+  = f.hidden_field :player_session_id, value: player_session_id
+  = f.hidden_field :answer_id, id: "answer#{count}-field", value: (answer.id if answer.present?)
+  = f.hidden_field :time, id: "time-field#{count}", value: -1
+  %button.btn.btn-lg.col-12.col-lg-11.rounded-5{ type: 'submit', class: "bg-answer#{count}", id: "answer#{count}-submit", onclick: 'waiting_screen()' }
+    .bi.text-white.py-2.my-2{ class: "bi-#{icon}-fill", style: 'font-size: 5rem;' }
+
+:javascript
+  // Add the feature of answersList class to d-block.
+  const waiting_screen = () => {
+    answersList = document.getElementById('answers-list');
+    answersList.classList.remove('d-block');
+    answersList.classList.add('d-none');
+
+    answerTitleDiv = document.getElementById('player-answer-title');
+    answerTitleDiv.replaceChildren();
+
+    newDiv = document.createElement('div');
+    newDiv.textContent = 'Answer recorded, now wait...';
+    answerTitleDiv.appendChild(newDiv);
+
+    playerAnswerIcon = document.getElementById('player-answer-icon');
+    playerAnswerIcon.classList.remove('d-none');
+    playerAnswerIcon.classList.add('d-block');
+  }

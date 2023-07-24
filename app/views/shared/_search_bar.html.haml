@@ -1,0 +1,7 @@
+= form_tag path, method: :get, class: 'w-100' do
+  .input-group
+    = text_field_tag :query, params[:query], placeholder: text, class: 'border-secondary form-control fs-5', style: 'border-top-left-radius: 1.25rem; border-bottom-left-radius: 1.25rem;'
+    - if params[:query].present?
+      = link_to '', path, class: 'btn btn-secondary px-3 bi bi-x-lg fs-5'
+    %button.btn.btn-primary.px-3.border-secodary{ type: 'submit', style: 'border-top-right-radius: 1.25rem; border-bottom-right-radius: 1.25rem;', id: 'Search' }
+      .bi.bi-search.fs-5
